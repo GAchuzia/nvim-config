@@ -1,2 +1,3 @@
 # nvim-config
-GAchuzia's Neo Vim configs
+
+GAchuzia's nvim config
