@@ -12,13 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("config.options")
-require("config.keymaps")
+local plugins = {
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+}
+local opts = {}
 
-require("lazy").setup({
-  spec = {
-    { import = "plugins" },
-  },
-  install = { colorscheme = { "habamax" } },
-  checker = { enabled = true },
-})
+require("lazy").setup(plugins, opts)
+
+require("catppuccin").setup()
+vim.cmd.colorscheme "catppuccin"
