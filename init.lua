@@ -1,5 +1,6 @@
 -- Bootstrap lazy.nvim
 vim.g.mapleader = " "
+vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>', {})
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
