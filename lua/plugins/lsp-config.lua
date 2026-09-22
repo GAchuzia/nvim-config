@@ -1,31 +1,46 @@
 return {
   {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" },
-        automatic_installation = true,
-      })
-    end,
+    "mason-org/mason.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonUpdate", "MasonLog" },
+    opts = {},
   },
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "williamboman/mason-lspconfig.nvim" },
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
+      "saghen/blink.cmp",
+    },
     config = function()
-      require("lspconfig")
+      vim.lsp.config("*", {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+      })
       vim.lsp.config("lua_ls", {
-        flags = {
-          debounce_text_changes = 300,
+        settings = {
+          Lua = {
+            diagnostics = { globals = { "vim" } },
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
         },
       })
-      vim.lsp.enable({ "lua_ls" })
+      vim.lsp.config("sqls", { root_markers = { ".git" } })
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls",
+          "ts_ls",
+          "html",
+          "cssls",
+          "jsonls",
+          "ruby_lsp",
+          "pyright",
+          "sqls",
+          "gopls",
+          "clangd",
+        },
+        automatic_enable = true,
+      })
     end,
   },
 }
