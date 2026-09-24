@@ -137,12 +137,15 @@ Run `nvim` and let plugins and parsers install. Restart and open a code file to 
 
 ## What's included
 
-12 plugins total, including the manager and shared dependency:
+15 plugins total, including the manager and shared dependency:
 
 | Plugin | Purpose |
 | --- | --- |
 | lazy.nvim | Plugin management and lockfile |
 | catppuccin | Colors |
+| alpha-nvim | Startup dashboard and layout previews |
+| mini.icons | Icons for which-key and compatible plugins |
+| nvim-web-devicons | File icons for Telescope and compatible plugins |
 | telescope.nvim + plenary.nvim | File, text, and symbol search |
 | nvim-treesitter | Syntax highlighting |
 | nvim-lspconfig | Language server definitions |
@@ -153,6 +156,24 @@ Run `nvim` and let plugins and parsers install. Restart and open a code file to 
 | which-key.nvim | Shortcut help |
 
 File browsing, terminals, commenting, diagnostics, EditorConfig, and persistent undo use Neovim's built-ins.
+
+For icons, select a [Nerd Font](https://www.nerdfonts.com/) 3.3+ in your terminal's font settings. Both icon providers are loaded separately; mini.icons does not replace nvim-web-devicons. They don't add icons to the built-in netrw explorer.
+
+## Dashboard layouts
+
+Plain `nvim` opens the default dashboard. Opening a file or directory, such as `nvim .`, skips it.
+
+Run `:Dashboard` to choose a layout, or preview one directly:
+
+| Command | Layout |
+| --- | --- |
+| `:Dashboard dashboard` | Centered banner and shortcuts |
+| `:Dashboard startify` | Left-aligned banner, shortcuts, and grouped recent files |
+| `:Dashboard theta` | Centered banner, recent files from this directory, and shortcuts |
+
+Press `d` on any dashboard to choose another layout. Use the displayed shortcut letters, or move with `j`/`k` and press Enter. `:Alpha` toggles the selected layout; previews last for the session. To set your startup choice, change `opts.theme` in `lua/plugins/dashboard.lua` to `dashboard`, `startify`, or `theta`.
+
+These are layouts, not a collection of different artworks: all three use Alpha's default Neovim banner. See the [community gallery](https://github.com/goolord/alpha-nvim/discussions/16) for custom banners and layouts; those examples aren't installed automatically.
 
 ## Everyday use
 
@@ -264,7 +285,7 @@ Add parsers with `:TSInstall rust` (or another language), and formatter mappings
 ## Maintenance
 
 - `:Lazy restore` restores the committed plugin versions; `:Lazy update` intentionally updates them. Review the lockfile diff.
-- `:TSUpdate` updates parsers to match Treesitter.
+- `:TSUpdate` updates parsers to match Treesitter. `:checkhealth nvim-treesitter` checks parsers and queries; `:InspectTree` shows the current file's syntax tree. A missing `tree-sitter` CLI warning is harmless for normal parser installs—it is only needed to generate parsers from grammars.
 - `:Mason` shows installed tools; `:MasonLog` explains installation failures.
 - `:checkhealth vim.lsp` checks attached servers; `:ConformInfo` explains formatting.
 - `:checkhealth` and `:messages` help with startup/runtime issues.
@@ -274,6 +295,6 @@ Use the health checks above after changing or updating the config.
 
 ### File map
 
-`init.lua` checks the Neovim version, loads the core modules, and starts Lazy; change it for startup behavior. In `lua/config/`, edit `options.lua` for indentation, display, and clipboard defaults; `keymaps.lua` for general shortcuts and the LazyGit launcher; and `autocmds.lua` for yank highlighting, diagnostic display, and mappings that appear when an LSP attaches. In `lua/plugins/`, `colorscheme.lua` selects and configures the theme; `completion.lua` sets completion sources and popup behavior; `editor.lua` names the shortcut groups in which-key; `formatting.lua` maps filetypes to formatters; `git.lua` configures Gitsigns and its buffer-local shortcuts; `lsp-config.lua` lists default servers and their settings; `telescope.lua` defines search pickers, shortcuts, and exclusions; and `treesitter.lua` selects parsers and highlighting settings. Edit the relevant file, then restart Neovim to apply it.
+`init.lua` checks the Neovim version, loads the core modules, and starts Lazy; change it for startup behavior. In `lua/config/`, edit `options.lua` for indentation, display, and clipboard defaults; `keymaps.lua` for general shortcuts and the LazyGit launcher; and `autocmds.lua` for yank highlighting, diagnostic display, and mappings that appear when an LSP attaches. In `lua/plugins/`, `colorscheme.lua` selects and configures the theme; `completion.lua` sets completion sources and popup behavior; `dashboard.lua` sets the startup layout, menu actions, and layout picker; `editor.lua` names the shortcut groups in which-key; `formatting.lua` maps filetypes to formatters; `git.lua` configures Gitsigns and its buffer-local shortcuts; `icons.lua` loads both icon providers; `lsp-config.lua` lists default servers and their settings; `telescope.lua` defines search pickers, shortcuts, and exclusions; and `treesitter.lua` selects parsers and highlighting settings. Edit the relevant file, then restart Neovim to apply it.
 
 `README.md` is the quick-start page; `GUIDE.md` holds the detailed instructions—update these when behavior changes. `lazy-lock.json` records exact plugin revisions; let Lazy maintain it rather than editing hashes by hand. `.stylua.toml` defines how this repo's Lua is formatted; adjust it to change the coding style. `.gitignore` keeps swap files, backups, and macOS metadata out of Git; extend it for local artifacts, not files the config needs.
