@@ -1,7 +1,5 @@
 # nvim-config
 
-GAchuzia's Neovim config.
-
 Requires **Neovim 0.11.3–0.11.x**, Git, ripgrep, Node.js/npm, and a C compiler. Tested on 0.11.6; 0.12 is not supported.
 
 ## Setup
