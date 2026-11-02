@@ -18,6 +18,14 @@ return {
     },
     opts = {
       defaults = {
+        layout_strategy = "flex",
+        layout_config = {
+          width = 0.95,
+          height = 0.9,
+          flex = { flip_columns = 120 },
+          horizontal = { preview_width = 0.55, preview_cutoff = 0 },
+          vertical = { preview_height = 0.45, preview_cutoff = 0 },
+        },
         vimgrep_arguments = {
           "rg",
           "--color=never",
