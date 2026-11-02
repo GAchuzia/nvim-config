@@ -144,20 +144,20 @@ Run `nvim` and let plugins and parsers install. Restart and open a code file to 
 | lazy.nvim | Plugin management and lockfile |
 | catppuccin | Colors |
 | alpha-nvim | Startup dashboard and layout previews |
-| mini.icons | Icons for which-key and compatible plugins |
-| nvim-web-devicons | File icons for Telescope and compatible plugins |
+| mini.icons | Icons, including a nvim-web-devicons shim for plugins that expect it |
 | telescope.nvim + plenary.nvim | File, text, and symbol search |
-| nvim-treesitter | Syntax highlighting |
+| nvim-treesitter | Syntax highlighting and indentation |
 | nvim-lspconfig | Language server definitions |
 | mason.nvim + mason-lspconfig.nvim | Install and enable language servers |
 | blink.cmp (v1) | Code, path, and buffer completion |
 | conform.nvim | Explicit formatting |
 | gitsigns.nvim | Changed-line markers, hunk preview/staging, blame |
 | which-key.nvim | Shortcut help |
+| lualine.nvim | Statusline |
 
 File browsing, terminals, commenting, diagnostics, EditorConfig, and persistent undo use Neovim's built-ins.
 
-For icons, select a [Nerd Font](https://www.nerdfonts.com/) 3.3+ in your terminal's font settings. Both icon providers are loaded separately; mini.icons does not replace nvim-web-devicons. They don't add icons to the built-in netrw explorer.
+For icons, select a [Nerd Font](https://www.nerdfonts.com/) 3.3+ in your terminal's font settings. mini.icons is the only icon provider; it mocks nvim-web-devicons so plugins that require that module still get icons. They don't add icons to the built-in netrw explorer.
 
 ## Dashboard layouts
 
