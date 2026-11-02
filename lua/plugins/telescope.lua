@@ -1,3 +1,12 @@
+-- Excluded once, by rg, so it never walks these directories at all.
+local ignore_dirs = { ".git", "node_modules", "dist", "build", "vendor" }
+
+local ignore_globs = {}
+for _, dir in ipairs(ignore_dirs) do
+  table.insert(ignore_globs, "--glob")
+  table.insert(ignore_globs, "!**/" .. dir .. "/*")
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -35,15 +44,7 @@ return {
           "--column",
           "--smart-case",
           "--hidden",
-          "--glob",
-          "!.git/*",
-        },
-        file_ignore_patterns = {
-          "node_modules[/\\]",
-          "%.git[/\\]",
-          "dist[/\\]",
-          "build[/\\]",
-          "vendor[/\\]",
+          unpack(ignore_globs),
         },
       },
       pickers = {
@@ -51,7 +52,7 @@ return {
           hidden = true,
           -- Use Telescope's fallback if rg is missing.
           find_command = vim.fn.executable("rg") == 1
-              and { "rg", "--files", "--hidden", "--glob", "!.git/*" }
+              and { "rg", "--files", "--hidden", unpack(ignore_globs) }
             or nil,
         },
       },
