@@ -4,10 +4,10 @@ return {
     version = "*",
     lazy = false,
     opts = {},
-  },
-  {
-    "nvim-tree/nvim-web-devicons",
-    lazy = false,
-    opts = { default = true },
+    config = function(_, opts)
+      require("mini.icons").setup(opts)
+      -- Serve plugins that still require("nvim-web-devicons").
+      require("mini.icons").mock_nvim_web_devicons()
+    end,
   },
 }
