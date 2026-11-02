@@ -137,7 +137,7 @@ Run `nvim` and let plugins and parsers install. Restart and open a code file to 
 
 ## What's included
 
-15 plugins total, including the manager and shared dependency:
+16 plugins total, including the manager and shared dependency:
 
 | Plugin | Purpose |
 | --- | --- |
@@ -154,10 +154,11 @@ Run `nvim` and let plugins and parsers install. Restart and open a code file to 
 | gitsigns.nvim | Changed-line markers, hunk preview/staging, blame |
 | which-key.nvim | Shortcut help |
 | lualine.nvim | Statusline |
+| oil.nvim | File explorer |
 
-File browsing, terminals, commenting, diagnostics, EditorConfig, and persistent undo use Neovim's built-ins.
+Terminals, commenting, diagnostics, EditorConfig, and persistent undo use Neovim's built-ins.
 
-For icons, select a [Nerd Font](https://www.nerdfonts.com/) 3.3+ in your terminal's font settings. mini.icons is the only icon provider; it mocks nvim-web-devicons so plugins that require that module still get icons. They don't add icons to the built-in netrw explorer.
+For icons, select a [Nerd Font](https://www.nerdfonts.com/) 3.3+ in your terminal's font settings. mini.icons is the only icon provider; it mocks nvim-web-devicons so plugins that require that module still get icons.
 
 ## Dashboard layouts
 
@@ -192,7 +193,7 @@ nvim .
 | `Space fg` / `Space fw` | Search project text / word under cursor |
 | `Space fb` / `Space fr` | Open buffers / recent files |
 | `Space fh` / `Space fk` | Search help / keybindings |
-| `Ctrl-n` / `Space e` | Toggle built-in file explorer |
+| `Ctrl-n` / `Space e` | Open file explorer |
 | `Space w` / `Space q` | Save / close window |
 | `Shift-h` / `Shift-l` | Previous / next buffer |
 | `Space bd` | Close buffer |
@@ -223,7 +224,7 @@ If search is empty or fails:
 - `:echo executable('rg')` should print `1`. Text search requires ripgrep (`rg`) on Neovim's PATH. Install it through your package manager (e.g. `brew install ripgrep`), then reopen Neovim from that shell.
 - `:messages` shows errors. Ignored files won't appear when using `rg` or `fd`; use the explorer if needed.
 
-**Explorer:** `Enter` opens a file/directory, `-` goes up, `%` creates a file, `d` creates a directory, `R` renames, and `D` deletes. Use `:help netrw` for more.
+**Explorer:** Oil shows a directory as an editable buffer, hidden files included. `Enter` opens a file/directory and `-` goes up. Create, rename, move, and delete by editing the lines as text, then `:w` to apply; deletions go to the trash. `g?` lists every mapping and `:help oil.nvim` has the rest.
 
 **Terminal:** run dev servers, tests, and Git commands normally. `Esc Esc` returns to Normal mode; `i` resumes typing. `:hide` hides the terminal without stopping its process; reopen it with `Space fb`. `Ctrl-c` stops a foreground command; `exit` closes the shell. Each `Space tt` creates a new terminal, not a toggle.
 

@@ -2,8 +2,6 @@ local map = vim.keymap.set
 
 map("n", "<leader>w", "<cmd>write<cr>", { desc = "Save buffer" })
 map("n", "<leader>q", "<cmd>quit<cr>", { desc = "Quit window" })
-map("n", "<leader>e", "<cmd>Lexplore<cr>", { desc = "Toggle file explorer" })
-map("n", "<C-n>", "<cmd>Lexplore<cr>", { desc = "Toggle file explorer" })
 map("n", "<leader>tt", "<cmd>botright 12split | terminal<cr>", { desc = "New terminal" })
 map("n", "<leader>gg", function()
   if vim.fn.executable("lazygit") == 0 then
