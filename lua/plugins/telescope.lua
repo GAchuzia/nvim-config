@@ -50,7 +50,8 @@ return {
         find_files = {
           hidden = true,
           -- Use Telescope's fallback if rg is missing.
-          find_command = vim.fn.executable("rg") == 1 and { "rg", "--files", "--glob", "!.git/*" }
+          find_command = vim.fn.executable("rg") == 1
+              and { "rg", "--files", "--hidden", "--glob", "!.git/*" }
             or nil,
         },
       },
