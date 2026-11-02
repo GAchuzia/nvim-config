@@ -30,6 +30,8 @@ return {
     },
     auto_install = false,
     highlight = { enable = true },
+    -- Python's Treesitter indent is known to be unreliable.
+    indent = { enable = true, disable = { "python" } },
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
